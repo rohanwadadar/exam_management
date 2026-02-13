@@ -1,0 +1,58 @@
+:root {
+    --primary: #6c5ce7;
+    --primary-dark: #5a4bd1;
+    --accent: #00cec9;
+    --bg: #0f0f1a;
+    --bg-card: rgba(255,255,255,0.05);
+    --text: #e0e0e0;
+    --text-muted: #888;
+    --border: rgba(255,255,255,0.08);
+    --success: #00b894;
+    --danger: #d63031;
+    --warning: #fdcb6e;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+.hero-section { background: linear-gradient(135deg, var(--primary) 0%, #2d3436 100%); color: white; padding: 18px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+.glass-card, .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(12px); color: var(--text); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+.card:hover { transform: translateY(-2px); transition: 0.3s; }
+.form-control, .form-select { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text); border-radius: 10px; }
+.form-control:focus, .form-select:focus { background: rgba(255,255,255,0.1); border-color: var(--primary); color: var(--text); box-shadow: 0 0 0 3px rgba(108,92,231,0.2); }
+.form-control::placeholder { color: var(--text-muted); }
+.form-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.75rem; }
+.btn-primary { background: var(--primary); border: none; border-radius: 10px; font-weight: 600; transition: 0.3s; }
+.btn-primary:hover { background: var(--primary-dark); transform: scale(1.02); }
+.btn-success { background: var(--success); border: none; border-radius: 10px; }
+.btn-danger { background: var(--danger); border: none; border-radius: 10px; }
+.btn-info { background: var(--accent); border: none; color: #000; border-radius: 10px; }
+.btn-warning { background: var(--warning); border: none; color: #000; border-radius: 10px; }
+.btn-outline-primary { border-color: var(--primary); color: var(--primary); border-radius: 10px; }
+.btn-outline-primary:hover { background: var(--primary); color: white; }
+.nav-pills .nav-link { color: var(--text-muted); border-radius: 10px; font-weight: 600; }
+.nav-pills .nav-link.active { background: var(--primary); color: white; }
+.sidebar-link { padding: 12px 18px; color: var(--text-muted); text-decoration: none; display: block; border-radius: 10px; margin-bottom: 4px; transition: 0.3s; font-weight: 500; }
+.sidebar-link:hover, .sidebar-link.active { background: rgba(108,92,231,0.15); color: var(--primary); font-weight: 600; }
+.table { color: var(--text); }
+.table thead th { background: rgba(108,92,231,0.1); border-bottom: 2px solid var(--primary); color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.table td { border-color: var(--border); vertical-align: middle; }
+.badge { border-radius: 8px; font-weight: 500; }
+.modal-content { background: #1a1a2e; border: 1px solid var(--border); color: var(--text); }
+.modal-header { border-bottom-color: var(--border); }
+.btn-close { filter: invert(1); }
+.exam-header { background: linear-gradient(135deg, #d63031, #6c5ce7); padding: 15px 0; position: sticky; top: 0; z-index: 100; }
+.question-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 20px; transition: 0.3s; }
+.question-card:hover { border-color: var(--primary); }
+.option-label { display: block; padding: 12px 16px; border: 2px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer; transition: 0.3s; }
+.option-label:hover { border-color: var(--primary); background: rgba(108,92,231,0.08); }
+.option-label input:checked + span { color: var(--primary); font-weight: 600; }
+.option-label:has(input:checked) { border-color: var(--primary); background: rgba(108,92,231,0.15); }
+.option-label input { display: none; }
+.stat-card { background: linear-gradient(135deg, rgba(108,92,231,0.2), rgba(0,206,201,0.1)); border: 1px solid var(--border); border-radius: 16px; padding: 20px; text-align: center; }
+.stat-card h3 { font-size: 2rem; font-weight: 800; color: var(--accent); }
+.stat-card p { color: var(--text-muted); font-size: 0.85rem; margin: 0; }
+.pulse { animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+.fade-in { animation: fadeIn 0.4s ease; }
+.result-pass { border-left: 4px solid var(--success) !important; }
+.result-fail { border-left: 4px solid var(--danger) !important; }

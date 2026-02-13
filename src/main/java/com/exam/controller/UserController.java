@@ -38,6 +38,20 @@ public class UserController {
         }
     }
 
+    // Get user by id
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        try {
+            User user = userService.getUserById(id);
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            }
+            return ResponseEntity.status(404).body("User not found");
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(e.getMessage());
+        }
+    }
+
     // Admin: Get all students
     @GetMapping("/students")
     public ResponseEntity<?> getAllStudents() {

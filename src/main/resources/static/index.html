@@ -7,90 +7,27 @@
     <title>Exam Management Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <style>
-        :root {
-            --primary-purple: #764ba2;
-            --secondary-blue: #667eea;
-        }
-
-        body {
-            background-color: #f0f2f5;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-purple) 100%);
-            color: white;
-            padding: 40px 0;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-        }
-
-        .btn-primary {
-            background: var(--primary-purple);
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: #5e3a8a;
-        }
-
-        #mainContent,
-        #loginSection {
-            display: none;
-        }
-
-        .role-badge {
-            font-size: 0.8rem;
-            padding: 5px 12px;
-            border-radius: 20px;
-        }
-
-        .sidebar-link {
-            padding: 12px 20px;
-            color: #444;
-            text-decoration: none;
-            display: block;
-            border-radius: 10px;
-            margin-bottom: 5px;
-        }
-
-        .sidebar-link:hover,
-        .sidebar-link.active {
-            background: white;
-            color: var(--primary-purple);
-            font-weight: 600;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
     <!-- Hero Header -->
     <div class="hero-section text-center shadow-sm">
         <div class="container d-flex justify-content-between align-items-center">
-            <h1 class="h2 fw-bold mb-0"><i class="bi bi-mortarboard-fill me-2"></i>Exam Management</h1>
+            <h1 class="h2 fw-bold mb-0"><i class="bi bi-mortarboard-fill me-2"></i>Exam Portal</h1>
             <div id="userInfo" class="d-none">
                 <span id="displayUsername" class="me-3 fw-semibold"></span>
+                <span id="displayRole" class="badge me-2"></span>
                 <button class="btn btn-outline-light btn-sm" onclick="logout()">Logout</button>
             </div>
         </div>
     </div>
 
-    <!-- Login/Register Selection -->
-    <div id="authSection" class="container" style="max-width: 500px; margin-top: 50px;">
-        <div class="card p-4">
+    <!-- Auth Section -->
+    <div id="authSection" class="container" style="max-width:520px;margin-top:50px;">
+        <div class="card glass-card p-4">
             <ul class="nav nav-pills nav-justified mb-4" id="pills-tab" role="tablist">
                 <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill"
                         data-bs-target="#login">Login</button></li>
@@ -98,51 +35,56 @@
                         Up</button></li>
             </ul>
             <div class="tab-content">
-                <!-- Login Tab -->
                 <div class="tab-pane fade show active" id="login">
                     <form id="loginForm">
-                        <div class="mb-3">
-                            <label class="form-label text-muted small uppercase fw-bold">Username</label>
+                        <div class="mb-3"><label class="form-label fw-bold small">Username</label>
                             <input type="text" class="form-control" id="login-username" placeholder="admin" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small uppercase fw-bold">Password</label>
+                        <div class="mb-3"><label class="form-label fw-bold small">Password</label>
                             <input type="password" class="form-control" id="login-password" placeholder="admin123456"
                                 required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100 py-2">Sign In</button>
                     </form>
                 </div>
-                <!-- Signup Tab -->
                 <div class="tab-pane fade" id="signup">
                     <form id="signupForm">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label text-muted small uppercase fw-bold">Username</label>
-                                <input type="text" class="form-control" id="reg-username" required>
+                            <div class="col-6 mb-3"><label class="form-label fw-bold small">Username</label><input
+                                    type="text" class="form-control" id="reg-username" required></div>
+                            <div class="col-6 mb-3"><label class="form-label fw-bold small">Password</label><input
+                                    type="password" class="form-control" id="reg-password" required></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 mb-3"><label class="form-label fw-bold small">First Name</label><input
+                                    type="text" class="form-control" id="reg-fname" required></div>
+                            <div class="col-6 mb-3"><label class="form-label fw-bold small">Last Name</label><input
+                                    type="text" class="form-control" id="reg-lname" required></div>
+                        </div>
+                        <div class="mb-3"><label class="form-label fw-bold small">Email</label><input type="email"
+                                class="form-control" id="reg-email" required></div>
+                        <div class="mb-3"><label class="form-label fw-bold small">Phone</label><input type="text"
+                                class="form-control" id="reg-phone"></div>
+                        <div class="mb-3"><label class="form-label fw-bold small">Registration Number</label><input
+                                type="text" class="form-control" id="reg-regno" required></div>
+                        <div class="row">
+                            <div class="col-6 mb-3"><label class="form-label fw-bold small">Department</label><select
+                                    class="form-select" id="reg-dept"></select></div>
+                            <div class="col-6 mb-3"><label class="form-label fw-bold small">Semester</label>
+                                <select class="form-select" id="reg-semester">
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
+                                    <option value="5">Semester 5</option>
+                                    <option value="6">Semester 6</option>
+                                    <option value="7">Semester 7</option>
+                                    <option value="8">Semester 8</option>
+                                </select>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label text-muted small uppercase fw-bold">Password</label>
-                                <input type="password" class="form-control" id="reg-password" required>
-                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small uppercase fw-bold">Full Name</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="reg-fname" placeholder="First Name"
-                                    required>
-                                <input type="text" class="form-control" id="reg-lname" placeholder="Last Name" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label text-muted small uppercase fw-bold">Email</label>
-                            <input type="email" class="form-control" id="reg-email" required>
-                        </div>
-                        <div class="mb-3">
-                            <input type="hidden" id="reg-role" value="STUDENT">
-                            <small class="text-muted">Sign up is for students only. Admin login uses default
-                                credentials.</small>
-                        </div>
+                        <small class="text-muted d-block mb-3">Sign up for students only. Admin uses default
+                            credentials.</small>
                         <button type="submit" class="btn btn-primary w-100 py-2">Create Student Account</button>
                     </form>
                 </div>
@@ -151,434 +93,56 @@
         </div>
     </div>
 
-    <!-- MAIN DASHBOARD CONTENT -->
-    <div id="mainContent" class="container">
+    <!-- MAIN DASHBOARD -->
+    <div id="mainContent" class="container" style="display:none">
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-3">
-                <div class="card p-3 mb-4">
-                    <div id="studentMenu">
+                <div class="card glass-card p-3 mb-4">
+                    <div id="studentMenu" style="display:none">
                         <a href="#" class="sidebar-link active" onclick="showPanel('studentExams')"><i
                                 class="bi bi-card-checklist me-2"></i>Available Exams</a>
                         <a href="#" class="sidebar-link" onclick="showPanel('myRegistrations')"><i
                                 class="bi bi-journal-check me-2"></i>My Registrations</a>
+                        <a href="#" class="sidebar-link" onclick="showPanel('myResults')"><i
+                                class="bi bi-trophy me-2"></i>My Results</a>
                     </div>
-                    <div id="adminMenu">
+                    <div id="adminMenu" style="display:none">
                         <a href="#" class="sidebar-link active" onclick="showPanel('adminExams')"><i
                                 class="bi bi-pencil-square me-2"></i>Manage Exams</a>
+                        <a href="#" class="sidebar-link" onclick="showPanel('manageQuestions')"><i
+                                class="bi bi-question-circle me-2"></i>Manage Questions</a>
                         <a href="#" class="sidebar-link" onclick="showPanel('manageStudents')"><i
                                 class="bi bi-people-fill me-2"></i>Manage Students</a>
+                        <a href="#" class="sidebar-link" onclick="showPanel('viewResults')"><i
+                                class="bi bi-clipboard-data me-2"></i>View Results</a>
+                        <a href="#" class="sidebar-link" onclick="showPanel('manageDepts')"><i
+                                class="bi bi-building me-2"></i>Departments</a>
                     </div>
                 </div>
             </div>
-
-            <!-- Content Area -->
-            <div class="col-md-9">
-                <!-- PANEL: Available Exams (Student) -->
-                <div id="panel-studentExams" class="panel">
-                    <div class="card p-4">
-                        <h4 class="mb-4">Available Examinations</h4>
-                        <div id="studentExamsList" class="row"></div>
-                    </div>
-                </div>
-
-                <!-- PANEL: My Registrations (Student) -->
-                <div id="panel-myRegistrations" class="panel" style="display:none">
-                    <div class="card p-4">
-                        <h4 class="mb-4">Successful Enrollments</h4>
-                        <div class="table-responsive">
-                            <table class="table align-middle">
-                                <thead>
-                                    <tr>
-                                        <th>Exam Title</th>
-                                        <th>Subject</th>
-                                        <th>Exam Date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="registrationsList"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PANEL: Manage Exams (Admin) -->
-                <div id="panel-adminExams" class="panel" style="display:none">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="card p-4">
-                                <h5 class="mb-3">Create New Exam</h5>
-                                <form id="examForm">
-                                    <input type="text" id="exam-id" hidden>
-                                    <div class="mb-3"><input type="text" class="form-control" id="exam-title"
-                                            placeholder="Title" required></div>
-                                    <div class="mb-3"><input type="text" class="form-control" id="exam-subject"
-                                            placeholder="Subject" required></div>
-                                    <div class="row mb-3">
-                                        <div class="col"><input type="number" class="form-control" id="exam-marks"
-                                                placeholder="Marks" required></div>
-                                        <div class="col"><input type="number" class="form-control" id="exam-qs"
-                                                placeholder="Questions" required></div>
-                                    </div>
-                                    <textarea class="form-control mb-3" id="exam-desc"
-                                        placeholder="Description"></textarea>
-                                    <button type="submit" id="examBtn" class="btn btn-success w-100">Save Exam</button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card p-4">
-                                <h5 class="mb-3">Exam List</h5>
-                                <div id="adminExamsList"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PANEL: Manage Students (Admin) -->
-                <div id="panel-manageStudents" class="panel" style="display:none">
-                    <div class="card p-4">
-                        <h4 class="mb-4">All Students</h4>
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Username</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="studentTableBody"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Content -->
+            <div class="col-md-9" id="contentArea"></div>
         </div>
     </div>
 
-    <!-- Edit Student Modal -->
-    <div class="modal fade" id="editUserModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5>Manage Student & Enrolled Exams</h5><button type="button" class="btn-close"
-                        data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editUserForm">
-                        <input type="hidden" id="edit-id">
-                        <div class="row">
-                            <div class="col-md-6 mb-3"><label>First Name</label><input type="text" id="edit-fname"
-                                    class="form-control"></div>
-                            <div class="col-md-6 mb-3"><label>Last Name</label><input type="text" id="edit-lname"
-                                    class="form-control"></div>
-                        </div>
-                        <div class="mb-3"><label>Email</label><input type="email" id="edit-email" class="form-control">
-                        </div>
-                        <div class="mb-3"><label>New Password (Leave blank to keep)</label><input type="password"
-                                id="edit-password" class="form-control" placeholder="admin123456"></div>
-                        <button type="submit" class="btn btn-primary w-100 mb-4">Update Student Profile</button>
-                    </form>
-
-                    <hr>
-                    <h5 class="mb-3">Student's Exam Enrollments</h5>
-                    <div class="table-responsive">
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Exam Title</th>
-                                    <th>Exam Date</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="studentEnrollmentsList"></tbody>
-                        </table>
-                    </div>
+    <!-- EXAM TAKING FULLSCREEN -->
+    <div id="examScreen" style="display:none">
+        <div class="exam-header">
+            <div class="container d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 text-white" id="examScreenTitle"></h5>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="badge bg-warning text-dark fs-6" id="examTimer">00:00</span>
+                    <span class="badge bg-info" id="examProgress">0/0</span>
+                    <button class="btn btn-danger btn-sm" onclick="submitExam()">Submit Exam</button>
                 </div>
             </div>
         </div>
+        <div class="container mt-4" id="examQuestionsArea"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const API = "http://localhost:8080";
-        let currentUser = null;
-        const editModal = new bootstrap.Modal(document.getElementById('editUserModal'));
-
-        // --- AUTH LOGIC ---
-        document.getElementById('signupForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            try {
-                const data = {
-                    username: document.getElementById('reg-username').value,
-                    password: document.getElementById('reg-password').value,
-                    firstName: document.getElementById('reg-fname').value,
-                    lastName: document.getElementById('reg-lname').value,
-                    email: document.getElementById('reg-email').value,
-                    role: "STUDENT"
-                };
-                const res = await fetch(`${API}/user/`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                if (!res.ok) throw new Error(await res.text());
-                alert("Account created! Please login.");
-                document.getElementById('signupForm').reset();
-                bootstrap.Tab.getInstance(document.querySelector('[data-bs-target="#login"]')).show();
-            } catch (err) { alert("Registration Error: " + err.message); }
-        });
-
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            try {
-                const data = {
-                    username: document.getElementById('login-username').value,
-                    password: document.getElementById('login-password').value
-                };
-                const res = await fetch(`${API}/user/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                if (!res.ok) throw new Error("Invalid username or password");
-                currentUser = await res.json();
-                startSession();
-            } catch (err) { document.getElementById('auth-status').innerText = err.message; }
-        });
-
-        function startSession() {
-            document.getElementById('authSection').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'block';
-            document.getElementById('userInfo').classList.remove('d-none');
-            document.getElementById('displayUsername').innerText = `Hello, ${currentUser.firstName}`;
-
-            if (currentUser.role === 'ADMIN') {
-                document.getElementById('adminMenu').style.display = 'block';
-                document.getElementById('studentMenu').style.display = 'none';
-                showPanel('adminExams');
-                loadAdminExams();
-            } else {
-                document.getElementById('adminMenu').style.display = 'none';
-                document.getElementById('studentMenu').style.display = 'block';
-                showPanel('studentExams');
-                loadAvailableExams();
-            }
-        }
-
-        function logout() { location.reload(); }
-
-        // --- NAVIGATION ---
-        function showPanel(id) {
-            document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
-            const targetPanel = document.getElementById(`panel-${id}`);
-            if (targetPanel) targetPanel.style.display = 'block';
-
-            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
-            if (event && event.target && event.target.classList.contains('sidebar-link')) {
-                event.target.classList.add('active');
-            }
-
-            if (id === 'manageStudents') loadAllStudents();
-            if (id === 'myRegistrations') loadMyRegistrations();
-        }
-
-        // --- ADMIN: EXAM MGMT ---
-        document.getElementById('examForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            try {
-                const data = {
-                    title: document.getElementById('exam-title').value,
-                    subject: document.getElementById('exam-subject').value,
-                    maxMarks: document.getElementById('exam-marks').value,
-                    numberOfQuestions: document.getElementById('exam-qs').value,
-                    description: document.getElementById('exam-desc').value,
-                    active: true
-                };
-                const id = document.getElementById('exam-id').value;
-                const method = id ? 'PUT' : 'POST';
-                if (id) data.id = id;
-
-                const res = await fetch(`${API}/exam/admin/`, {
-                    method: method,
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                if (!res.ok) throw new Error(await res.text());
-                loadAdminExams();
-                document.getElementById('examForm').reset();
-                document.getElementById('exam-id').value = "";
-                document.getElementById('examBtn').innerText = "Save Exam";
-            } catch (err) { alert("Save Error: " + err.message); }
-        });
-
-        async function loadAdminExams() {
-            const res = await fetch(`${API}/exam/`);
-            const data = await res.json();
-            document.getElementById('adminExamsList').innerHTML = data.map(e => `
-                <div class="border rounded p-3 mb-2 d-flex justify-content-between align-items-center">
-                    <div><strong>${e.title}</strong><br><small class="text-muted">${e.subject}</small></div>
-                    <div>
-                        <button class="btn btn-sm btn-info me-1" onclick="editExam(${JSON.stringify(e).replace(/"/g, '&quot;')})">Edit</button>
-                        <button class="btn btn-sm btn-danger" onclick="deleteExam(${e.id})">Delete</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function editExam(e) {
-            document.getElementById('exam-id').value = e.id;
-            document.getElementById('exam-title').value = e.title;
-            document.getElementById('exam-subject').value = e.subject;
-            document.getElementById('exam-marks').value = e.maxMarks;
-            document.getElementById('exam-qs').value = e.numberOfQuestions;
-            document.getElementById('exam-desc').value = e.description;
-            document.getElementById('examBtn').innerText = "Update Exam";
-            showPanel('adminExams');
-        }
-
-        async function deleteExam(id) {
-            if (confirm("Delete this exam?")) {
-                await fetch(`${API}/exam/admin/${id}`, { method: 'DELETE' });
-                loadAdminExams();
-            }
-        }
-
-        // --- ADMIN: STUDENT & ENROLLMENT MGMT ---
-        async function loadAllStudents() {
-            try {
-                const res = await fetch(`${API}/user/students`);
-                const students = await res.json();
-                document.getElementById('studentTableBody').innerHTML = students.map(s => `
-                    <tr>
-                        <td>${s.firstName} ${s.lastName}</td>
-                        <td>${s.email}</td>
-                        <td><span class="badge bg-light text-dark">${s.username}</span></td>
-                        <td>
-                            <button class="btn btn-sm btn-warning me-1" onclick="openEditUser(${JSON.stringify(s).replace(/"/g, '&quot;')})">Manage</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="deleteStudent(${s.id})">Delete</button>
-                        </td>
-                    </tr>
-                `).join('');
-            } catch (err) { alert("Load Students Error: " + err.message); }
-        }
-
-        async function openEditUser(s) {
-            document.getElementById('edit-id').value = s.id;
-            document.getElementById('edit-fname').value = s.firstName;
-            document.getElementById('edit-lname').value = s.lastName;
-            document.getElementById('edit-email').value = s.email;
-            document.getElementById('edit-password').value = "";
-
-            // Load student's exams
-            const res = await fetch(`${API}/exam/student/registrations/${s.id}`);
-            const enrollments = await res.json();
-            document.getElementById('studentEnrollmentsList').innerHTML = enrollments.map(en => `
-                <tr>
-                    <td>${en.exam.title}</td>
-                    <td><input type="date" class="form-control form-control-sm" id="enroll-date-${en.id}" value="${en.examDate || ''}"></td>
-                    <td>
-                        <select class="form-select form-select-sm" id="enroll-status-${en.id}">
-                            <option value="REGISTERED" ${en.status === 'REGISTERED' ? 'selected' : ''}>Registered</option>
-                            <option value="COMPLETED" ${en.status === 'COMPLETED' ? 'selected' : ''}>Completed</option>
-                        </select>
-                    </td>
-                    <td><button class="btn btn-sm btn-success" onclick="updateEnrollment(${en.id})">Update</button></td>
-                </tr>
-            `).join('') || '<tr><td colspan="4" class="text-center">No exams enrolled.</td></tr>';
-
-            editModal.show();
-        }
-
-        async function updateEnrollment(id) {
-            try {
-                const data = {
-                    id: id,
-                    examDate: document.getElementById(`enroll-date-${id}`).value,
-                    status: document.getElementById(`enroll-status-${id}`).value
-                };
-                const res = await fetch(`${API}/exam/admin/enrollment`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                if (!res.ok) throw new Error(await res.text());
-                alert("Enrollment details updated!");
-            } catch (err) { alert("Update failed: " + err.message); }
-        }
-
-        document.getElementById('editUserForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            try {
-                const data = {
-                    id: document.getElementById('edit-id').value,
-                    firstName: document.getElementById('edit-fname').value,
-                    lastName: document.getElementById('edit-lname').value,
-                    email: document.getElementById('edit-email').value,
-                    password: document.getElementById('edit-password').value,
-                    role: "STUDENT"
-                };
-                const res = await fetch(`${API}/user/`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-                if (!res.ok) throw new Error(await res.text());
-                loadAllStudents();
-                alert("Student profile updated!");
-            } catch (err) { alert("Update Error: " + err.message); }
-        });
-
-        async function deleteStudent(id) {
-            if (confirm("Delete this student permanently?")) {
-                await fetch(`${API}/user/${id}`, { method: 'DELETE' });
-                loadAllStudents();
-            }
-        }
-
-        // --- STUDENT: EXAM PORTAL ---
-        async function loadAvailableExams() {
-            const res = await fetch(`${API}/exam/`);
-            const data = await res.json();
-            document.getElementById('studentExamsList').innerHTML = data.map(e => `
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100 p-3 shadow-sm border-0">
-                        <div class="d-flex justify-content-between">
-                            <span class="badge bg-light text-primary border mb-2">${e.subject}</span>
-                            <span class="text-muted small">${e.maxMarks} Marks</span>
-                        </div>
-                        <h5 class="fw-bold">${e.title}</h5>
-                        <p class="text-muted small">${e.description || 'No description available'}</p>
-                        <button class="btn btn-outline-primary btn-sm mt-auto" onclick="registerForExam(${e.id})">Enroll Now</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        async function registerForExam(examId) {
-            try {
-                const res = await fetch(`${API}/exam/student/register?userId=${currentUser.id}&examId=${examId}`, { method: 'POST' });
-                if (!res.ok) throw new Error(await res.text());
-                alert("Registration Successful!");
-            } catch (err) { alert("Enrollment failed: " + err.message); }
-        }
-
-        async function loadMyRegistrations() {
-            const res = await fetch(`${API}/exam/student/registrations/${currentUser.id}`);
-            const data = await res.json();
-            document.getElementById('registrationsList').innerHTML = data.map(r => `
-                <tr>
-                    <td class="fw-semibold">${r.exam.title}</td>
-                    <td>${r.exam.subject}</td>
-                    <td><span class="text-primary fw-bold">${r.examDate || 'Waiting for Admin...'}</span></td>
-                    <td><span class="badge bg-success">${r.status}</span></td>
-                </tr>
-            `).join('');
-        }
-    </script>
+    <script src="app.js"></script>
 </body>
 
 </html>

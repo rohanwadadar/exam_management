@@ -1,7 +1,9 @@
 package com.exam.service;
 
 import com.exam.entity.User;
+import com.exam.entity.Department;
 import com.exam.repository.UserRepository;
+import com.exam.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.annotation.PostConstruct;
@@ -14,6 +16,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
     @PostConstruct
     public void initAdmin() {
@@ -31,6 +36,11 @@ public class UserService {
 
     public User createUser(User user) {
         try {
+            // Set department if departmentId provided via the department object
+            if (user.getDepartment() != null && user.getDepartment().getId() != null) {
+                Department dept = departmentRepository.findById(user.getDepartment().getId()).orElse(null);
+                user.setDepartment(dept);
+            }
             return userRepository.save(user);
         } catch (Exception e) {
             throw new RuntimeException("Error creating user: " + e.getMessage());
@@ -53,21 +63,30 @@ public class UserService {
         return userRepository.findByUsername(username).orElse(null);
     }
 
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
     public List<User> getAllStudents() {
-        return userRepository.findAll().stream()
-                .filter(u -> "STUDENT".equals(u.getRole()))
-                .toList();
+        return userRepository.findByRole("STUDENT");
     }
 
     public User updateUser(User user) {
         try {
-            User existing = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("User not found"));
+            User existing = userRepository.findById(user.getId())
+                    .orElseThrow(() -> new RuntimeException("User not found"));
             existing.setFirstName(user.getFirstName());
             existing.setLastName(user.getLastName());
             existing.setEmail(user.getEmail());
             existing.setPhone(user.getPhone());
+            existing.setRegistrationNumber(user.getRegistrationNumber());
+            existing.setSemester(user.getSemester());
+            if (user.getDepartment() != null && user.getDepartment().getId() != null) {
+                Department dept = departmentRepository.findById(user.getDepartment().getId()).orElse(null);
+                existing.setDepartment(dept);
+            }
             existing.setRole(user.getRole());
-            if(user.getPassword() != null && !user.getPassword().isEmpty()) {
+            if (user.getPassword() != null && !user.getPassword().isEmpty()) {
                 existing.setPassword(user.getPassword());
             }
             return userRepository.save(existing);

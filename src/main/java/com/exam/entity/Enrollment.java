@@ -22,6 +22,9 @@ public class Enrollment {
     @ManyToOne
     private Exam exam;
 
-    private String status; // REGISTERED, COMPLETED
-    private String examDate; // Date assigned by admin
+    private String status; // REGISTERED, APPROVED, COMPLETED, REJECTED
+    private String examDate;
+
+    private Integer score; // score obtained after exam
+    private Boolean examTaken = false; // whether user has taken the exam
 }
